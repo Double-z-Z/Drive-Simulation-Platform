@@ -1,0 +1,10 @@
+kafka:
+  bootstrap-servers: kafka1:9092,kafka2:9092,kafka3:9092
+  topics:
+    vehicle-data: vehicle-data-topic
+    sensor-data: sensor-data-topic
+    scene-data: scene-data-topic
+    log-data: log-data-topic
+  consumer:
+    group-id: simulation-data-group
+    auto-offset-reset: earliest

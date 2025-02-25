@@ -2,31 +2,10 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+build
 
 ### VS Code ###
 .vscode/
-
-### Mac OS ###
-.DS_Store
 
 ### Gradle ###
 .gradle/
@@ -37,4 +16,4 @@ gradle/wrapper/
 gradle/wrapper/gradle-wrapper.properties
 
 ### large files ###
-test-data-meta/*
+test-drive-meta/

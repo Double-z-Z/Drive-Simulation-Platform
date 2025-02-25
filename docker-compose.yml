@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  data-management:
+    build:
+      context: ./data-management
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    networks:
+      - simulation-network
+
+  algorithm:
+    build:
+      context: ./algorithm
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    networks:
+      - simulation-network
+
+  simulation:
+    build:
+      context: ./simulation
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8080"
+    networks:
+      - simulation-network
+
+  web-ui:
+    build:
+      context: ./web-ui
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8080"
+    networks:
+      - simulation-network
+
+  system-admin:
+    build:
+      context: ./system-admin
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8080"
+    networks:
+      - simulation-network
+
+networks:
+  simulation-network:
+    driver: bridge 
