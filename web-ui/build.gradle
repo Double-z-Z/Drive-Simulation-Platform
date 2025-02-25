@@ -1,0 +1,7 @@
+dependencies {
+    implementation project(':data-management')
+    implementation project(':algorithm')
+    implementation project(':simulation')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+} 
