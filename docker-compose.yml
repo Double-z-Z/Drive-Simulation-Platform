@@ -7,6 +7,47 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8081:8080"
+    depends_on:
+      - postgres
+      - hdfs-namenode
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/simulation_data
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    networks:
+      - simulation-network
+
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=simulation_data
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - simulation-network
+
+  hdfs-namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    environment:
+      - CLUSTER_NAME=test
+    ports:
+      - "9870:9870"
+    volumes:
+      - hdfs_namenode:/hadoop/dfs/name
+    networks:
+      - simulation-network
+
+  hdfs-datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    environment:
+      - CLUSTER_NAME=test
+      - CORE_CONF_fs_defaultFS=hdfs://hdfs-namenode:9000
+    depends_on:
+      - hdfs-namenode
     networks:
       - simulation-network
 
@@ -45,6 +86,12 @@ services:
       - "8085:8080"
     networks:
       - simulation-network
+
+
+# 定义逻辑卷，每个逻辑卷相当于宿主机上volumes目录下的一个目录 
+volumes:
+  postgres_data:
+  hdfs_namenode:
 
 networks:
   simulation-network:

@@ -11,9 +11,5 @@ build
 .gradle/
 gradle.properties
 
-### Gradle Wrapper ###
-gradle/wrapper/
-gradle/wrapper/gradle-wrapper.properties
-
 ### large files ###
 test-drive-meta/

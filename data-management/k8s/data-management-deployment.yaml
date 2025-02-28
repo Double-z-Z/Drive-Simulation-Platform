@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-management
+  template:
+    metadata:
+      labels:
+        app: data-management
+    spec:
+      containers:
+      - name: data-management
+        image: localhost:5000/data-management:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://postgres:5432/simulation_data
+        - name: SPRING_DATASOURCE_USERNAME
+          value: postgres
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: postgres
+        - name: MINIO_ENDPOINT
+          value: http://minio:9000
+        - name: MINIO_ACCESS_KEY
+          value: minioadmin
+        - name: MINIO_SECRET_KEY
+          value: minioadmin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-management
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: data-management

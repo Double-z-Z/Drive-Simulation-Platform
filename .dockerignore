@@ -1,0 +1,31 @@
+# 排除其他子项目目录
+/algorithm
+/simulation
+/web-ui
+/system-admin
+/mock
+
+# 排除所有子模块下的 build 目录
+**/build
+
+# 排除构建输出和临时文件
+/out
+/.gradle
+/.idea
+*.iml
+*.class
+*.log
+
+# 排除版本控制文件
+.git
+.gitignore
+
+# 排除特定配置文件
+gradle.properties
+settings.gradle
+
+# 排除 Dockerfile 自身
+Dockerfile
+
+# 排除 Kubernetes 配置文件
+data-management/k8s/*.yaml 
